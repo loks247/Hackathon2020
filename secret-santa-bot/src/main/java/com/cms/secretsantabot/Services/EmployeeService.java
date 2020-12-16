@@ -1,6 +1,8 @@
 package com.cms.secretsantabot.Services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,14 +12,27 @@ import com.cms.secretsantabot.Modals.Employee;
 
 @Service
 public class EmployeeService {
-	@Autowired
-	EmployeeRepository employeeRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
+    
+    public List<Employee> getAllEmployees()  {
+        return (List<Employee>) employeeRepository.getAllEmployees();
+    }
+    
+    
+    public Employee getEmployeesById(String id) 
+        {
+            return (Employee) employeeRepository.getEmployeesById(id);
+        }
 
-	public List<Employee> findAll() {
-		return (List<Employee>) employeeRepository.findAll();
-	}
+    private Employee filterEmployees(Predicate<Employee> strategy) {
+        return getAllEmployees().stream().filter(strategy).findFirst().orElse(null);
+    }
 
-
-
-	//wrtite methods to itneract db
+    public Employee addEmployees(Employee employee)
+    {
+        employee.setId("123");
+        return employee;
+    }
+    //wrtite methods to itneract db
 }
