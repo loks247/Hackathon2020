@@ -25,14 +25,14 @@ public class BotController {
 @Autowired
 	EmployeeService employeeService;
 
-	@GetMapping(value = "/getAllEmployees")
-	public List<Employee> findAll() {
-		return employeeService.findAll();
+	@GetMapping(value = "/employees")
+	public List<Employee> getAllEmployees() {
+		return employeeService.getAllEmployees();
 	}
 
-	@GetMapping(value = "/{id}")
-	public Employee findById(@PathVariable("id") Integer id) {
-		return null;
+	@GetMapping(value = "/employees/{id}")
+	public Employee findById(@PathVariable("id") String id) {
+		return employeeService.getEmployeesById(id);
 	}
 
 	@PostMapping
