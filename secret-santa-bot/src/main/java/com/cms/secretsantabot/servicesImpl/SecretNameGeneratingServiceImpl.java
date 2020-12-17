@@ -35,7 +35,7 @@ public class SecretNameGeneratingServiceImpl implements SecretNameGeneratingServ
 		log.info("Generation logic : Applied");
 		List<Integer> allEmpId = new ArrayList<>();
 		for(int iTemp = 0; iTemp <empList.size(); iTemp++) {
-			allEmpId.add(empList.get(iTemp).getEmpId()); //get all the employee ID, considering empId numeric
+			allEmpId.add(empList.get(iTemp).getId()); //get all the employee ID, considering empId numeric
 		}
 		List<Integer> choices = new ArrayList<Integer>();
 		List<FromGiftTo> fromGiftToList = new ArrayList<>();

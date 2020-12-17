@@ -1,4 +1,4 @@
-package com.cms.secretsantabot.Services;
+package com.cms.secretsantabot.servicesImpl;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -27,7 +27,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Employee getEmployeesById(int id)
     {
-        return (Employee) employeeRepository.getEmployeesById(id);
+        for ( Employee employee:employeeRepository.findAll()) {
+            if (employee.getId() == id)
+                return employee;
+        }
+        return null;
+    }
+
+    //Update employee
+    public Employee updateEmployee(Employee employee)
+    {
+        return employeeRepository.save(employee);
     }
 
     private Employee filterEmployees(Predicate<Employee> strategy) {
