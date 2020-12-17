@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cms.secretsantabot.model.Employee;
 import com.cms.secretsantabot.services.EmployeeService;
 
+
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/secretSanta", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BotController {
 
   @Autowired
 	EmployeeService employeeService;
-
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping(value = "/employees")
 	public List<Employee> getAllEmployees() {
 		System.out.println("inside getAllEmployees");
