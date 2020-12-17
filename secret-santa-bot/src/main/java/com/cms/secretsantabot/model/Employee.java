@@ -1,5 +1,8 @@
 package com.cms.secretsantabot.model;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,31 +10,32 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "employees")
+@AllArgsConstructor
 @Getter
 @Setter
 public class Employee {
-
 	@Id
-	public String id;
+	private String id;
+	private String empId;
+	private String empName;
+	private String emailAddress;
+	private List<String> wishList;
 
-	public Integer e_id;
-	public String name;
-	public String emailAddress;
+	public Employee() {
+	}
 
-	public Employee() {}
-
-	public Employee(Integer e_id, String name, String emailAddress) {
-		this.e_id = e_id;
-		this.name = name;
+	public Employee(String empId, String empName, String emailAddress, List<String> wishList) {
+		this.empId = empId;
+		this.emailAddress = empName;
 		this.emailAddress = emailAddress;
+		this.wishList = wishList;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-			"Employee[id=%s, e_id='%s', name='%s', emailaddress='%s']",
-			id, e_id, name, emailAddress);
+				"Employee[id=%s, empId='%s', empName='%s', emailAddress='%s']",
+				id, empId, empName, emailAddress);
 	}
 
 }
-
