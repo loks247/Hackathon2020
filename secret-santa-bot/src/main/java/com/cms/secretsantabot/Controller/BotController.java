@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cms.secretsantabot.Modals.Employee;
 import com.cms.secretsantabot.Services.EmployeeService;
+import com.cms.secretsantabot.model.Employee;
 
 @RestController
 @RequestMapping(value = "/api/santa/application", produces = MediaType.APPLICATION_JSON_VALUE)

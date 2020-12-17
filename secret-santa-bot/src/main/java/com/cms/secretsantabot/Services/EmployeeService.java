@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.secretsantabot.Dao.EmployeeRepository;
-import com.cms.secretsantabot.Modals.Employee;
+import com.cms.secretsantabot.model.Employee;
 
 @Service
 public class EmployeeService {
