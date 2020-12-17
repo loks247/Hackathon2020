@@ -25,7 +25,6 @@ public class SecretNameGeneratingServiceImpl implements SecretNameGeneratingServ
 
 	@Override
 	public void saveAllMatchedEmployees() {
-
 		List<Employee> empList = employeeRepository.findAll();
 		if (!CollectionUtils.isEmpty(empList)) {
 			generateConnections(empList).forEach((fromEmpId,toEmpId) ->{
@@ -40,7 +39,7 @@ public class SecretNameGeneratingServiceImpl implements SecretNameGeneratingServ
 	}
 
 	private Map<Integer, Integer> generateConnections(List<Employee> empList) {
-		log.info("Generation logic : Applied");
+		log.info("Secret Name Generation : Started");
 		Map<Integer, Integer> fromToMap = new HashMap<>();
 		if (empList.size() == 1) {
 			fromToMap.put(empList.get(0).getId(), empList.get(0).getId());
@@ -101,6 +100,7 @@ public class SecretNameGeneratingServiceImpl implements SecretNameGeneratingServ
 			start = choices.get(0);
 			for (int indexOfChoice = 0; indexOfChoice < choices.size(); indexOfChoice++) {
 				if (!pickStart) {
+					//Temporary log, needs to be commented or removed
 					log.info("EmpId {}.  is gifting to EmpId  {}.", choices.get(indexOfChoice - 1), choices.get(indexOfChoice));
 					fromToMap.put(choices.get(indexOfChoice - 1), choices.get(indexOfChoice));
 					if (choices.get(indexOfChoice).equals(start)) {

@@ -18,6 +18,4 @@ public interface EmployeeRepository extends MongoRepository<Employee, Integer> {
     @Override
     public Employee save(Employee employee);
 
-
-
 }
