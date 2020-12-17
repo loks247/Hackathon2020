@@ -1,4 +1,4 @@
-package com.cms.secretsantabot.Services;
+package com.cms.secretsantabot.servicesImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,11 @@ import org.springframework.stereotype.Service;
 import com.cms.secretsantabot.model.Employee;
 import com.cms.secretsantabot.model.FromGiftTo;
 import com.cms.secretsantabot.repository.EmployeeRepository;
+import com.cms.secretsantabot.services.SecretNameGeneratingService;
 
 @Slf4j
 @Service
-public class SecretNameGeneratingService {
+public class SecretNameGeneratingServiceImpl implements SecretNameGeneratingService {
 
 @Autowired
 	EmployeeRepository employeeRepository;
