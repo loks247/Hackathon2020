@@ -20,9 +20,10 @@ import com.cms.secretsantabot.model.Employee;
 import com.cms.secretsantabot.services.EmployeeService;
 import com.cms.secretsantabot.services.SecretNameGeneratingService;
 
-@CrossOrigin(maxAge = 3600)
+
 @Slf4j
 @RestController
+
 @RequestMapping(value = "/api/secretSanta", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BotController {
 
