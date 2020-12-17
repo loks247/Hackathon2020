@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Employee {
 	@Id
 	private String id;
-	private String empId;
+	private int empId;
 	private String empName;
 	private String emailAddress;
 	private List<String> wishList;
@@ -24,7 +24,7 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(String empId, String empName, String emailAddress, List<String> wishList) {
+	public Employee(int empId, String empName, String emailAddress, List<String> wishList) {
 		this.empId = empId;
 		this.emailAddress = empName;
 		this.emailAddress = emailAddress;
