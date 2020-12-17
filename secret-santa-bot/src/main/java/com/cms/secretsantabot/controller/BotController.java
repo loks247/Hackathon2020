@@ -75,6 +75,7 @@ public class BotController {
 	@GetMapping(value = "/getAllMatchedEmployees")
 	public List<Employee> getAllMatchedEmployees() {
 		log.info("Generation logic : controller");
+		nameGeneratingService.saveAllMatchedEmployees();
 		return employeeService.getAllEmployees();
 	}
 
