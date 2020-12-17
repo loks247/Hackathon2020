@@ -2,6 +2,8 @@ package com.cms.secretsantabot.controller;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,8 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cms.secretsantabot.model.Employee;
 import com.cms.secretsantabot.services.EmployeeService;
+import com.cms.secretsantabot.services.SecretNameGeneratingService;
 
-
+@Slf4j
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/secretSanta", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,6 +30,10 @@ public class BotController {
 
   @Autowired
 	EmployeeService employeeService;
+
+  @Autowired
+	SecretNameGeneratingService nameGeneratingService;
+
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping(value = "/employees")
 	public List<Employee> getAllEmployees() {
@@ -61,6 +68,12 @@ public class BotController {
 	public void delete(@PathVariable("id") Long id) {
 		//checkNotNull
 		//employeeService.deleteById(id);
+	}
+
+	@GetMapping(value = "/getAllMatchedEmployees")
+	public List<Employee> getAllMatchedEmployees() {
+		log.info("Generation logic : controller");
+		return employeeService.getAllEmployees();
 	}
 
 }

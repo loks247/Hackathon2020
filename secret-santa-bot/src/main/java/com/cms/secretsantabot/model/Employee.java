@@ -20,6 +20,7 @@ public class Employee {
 	private String empName;
 	private String emailAddress;
 	private List<String> wishList;
+	private int toEmpId;
 
 	public Employee() {
 	}
