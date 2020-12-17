@@ -1,6 +1,5 @@
-package com.cms.secretsantabot.Services;
+package com.cms.secretsantabot.servicesImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -16,13 +15,13 @@ public class EmployeeService {
     EmployeeRepository employeeRepository;
     
     public List<Employee> getAllEmployees()  {
-        return (List<Employee>) employeeRepository.getAllEmployees();
+        return employeeRepository.getAllEmployees();
     }
     
     
     public Employee getEmployeesById(String id) 
         {
-            return (Employee) employeeRepository.getEmployeesById(id);
+            return employeeRepository.getEmployeesById(id);
         }
 
     private Employee filterEmployees(Predicate<Employee> strategy) {
