@@ -17,7 +17,7 @@ public class Employee {
 	private String empName;
 	private String emailAddress;
 	private Map<String, String> wishList;
-
+	private int toEmpId;
 	public Employee() {
 	}
 
@@ -30,7 +30,9 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return String.format("Employee[empId='%s', empName='%s', emailAddress='%s', wishList='%s']", id, empName, emailAddress, wishList.toString());
+		return String.format(
+				"Employee[id=%s, empName='%s', emailAddress='%s']",
+				id, empName, emailAddress);
 	}
 
 }
