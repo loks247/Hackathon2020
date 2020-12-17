@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.cms.secretsantabot.model.Employee;
-import com.cms.secretsantabot.model.FromGiftTo;
 import com.cms.secretsantabot.repository.EmployeeRepository;
 import com.cms.secretsantabot.services.EmailService;
 
@@ -29,9 +28,9 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender mailSender;
 
 	@Override
-	public void sendEmails(List<FromGiftTo> fromGiftTos) {
-		fromGiftTos.stream().forEach(fromGiftTo -> {
-			Employee employee = employeeRepository.getEmployeesById(fromGiftTo.getToEmpId());
+	public void sendEmails(List<Employee> fromGiftTos) {
+		fromGiftTos.stream().forEach(emp1 -> {
+			Employee employee = employeeRepository.getEmployeesById(emp1.getToEmpId());
 			SimpleMailMessage simpleMailMessage = composeEmail("subject", "message", employee);
 			log.info("Sending Email to={}", employee.getEmpName());
 			mailSender.send(simpleMailMessage);
