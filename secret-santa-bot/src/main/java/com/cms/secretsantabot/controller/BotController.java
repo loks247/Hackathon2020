@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,15 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cms.secretsantabot.model.Employee;
 import com.cms.secretsantabot.services.EmployeeService;
 
-
+@CrossOrigin(maxAge = 3600)
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/secretSanta", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BotController {
 
-  @Autowired
+ @Autowired
 	EmployeeService employeeService;
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 	@GetMapping(value = "/employees")
 	public List<Employee> getAllEmployees() {
 		System.out.println("inside getAllEmployees");
@@ -47,9 +44,13 @@ public class BotController {
 		return employeeService.addEmployee(employee);
 	}
 
+	@RequestMapping(value = "/employees",method = RequestMethod.PUT)
+	public Employee updateEmployee(@RequestBody Employee employee) {
+		System.out.println("inside update record:"+ employee);
+		return employeeService.updateEmployee(employee);
+	}
 
-
-	@PutMapping(value = "/employees/{id}")
+	/*@PutMapping(value = "/employees/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable( "id" ) Long id, @RequestBody Employee resource) {
 		//checkNotNull
@@ -61,6 +62,6 @@ public class BotController {
 	public void delete(@PathVariable("id") Long id) {
 		//checkNotNull
 		//employeeService.deleteById(id);
-	}
+	}*/
 
 }
