@@ -1,4 +1,4 @@
-package com.cms.secretsantabot.Controller;
+package com.cms.secretsantabot.controller;
 
 import java.util.List;
 
@@ -8,41 +8,45 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cms.secretsantabot.servicesImpl.EmployeeService;
 import com.cms.secretsantabot.model.Employee;
+import com.cms.secretsantabot.services.EmployeeService;
 
 @RestController
-@RequestMapping(value = "/api/santa/application", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/secretSanta", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BotController {
 
-@Autowired
+  @Autowired
 	EmployeeService employeeService;
 
 	@GetMapping(value = "/employees")
 	public List<Employee> getAllEmployees() {
+		System.out.println("inside getAllEmployees");
 		return employeeService.getAllEmployees();
 	}
 
-	@GetMapping(value = "/employees/{id}")
-	public Employee findById(@PathVariable("id") String id) {
+	@GetMapping(value = "/employees/{empId}")
+	public Employee findById(@PathVariable("empId") int id) {
+		System.out.println("inside find by id:"+ id);
 		return employeeService.getEmployeesById(id);
 	}
 
-	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void create(@RequestBody Employee resource) {
-		
-		//create
+	@RequestMapping(value = "/employees",method = RequestMethod.POST)
+	public Employee addEmployee(@RequestBody Employee employee) {
+		System.out.println("inside add record:"+ employee);
+		return employeeService.addEmployee(employee);
 	}
 
-	@PutMapping(value = "/{id}")
+
+
+	@PutMapping(value = "/employees/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable( "id" ) Long id, @RequestBody Employee resource) {
 		//checkNotNull
