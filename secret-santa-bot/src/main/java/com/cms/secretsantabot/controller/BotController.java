@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cms.secretsantabot.model.Employee;
+import com.cms.secretsantabot.services.EmailService;
 import com.cms.secretsantabot.services.EmployeeService;
 import com.cms.secretsantabot.services.SecretNameGeneratingService;
 
@@ -27,11 +28,13 @@ import com.cms.secretsantabot.services.SecretNameGeneratingService;
 @RequestMapping(value = "/api/secretSanta", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BotController {
 
- @Autowired
+	@Autowired
 	EmployeeService employeeService;
 
+	@Autowired
+	EmailService emailService;
 
-  @Autowired
+	@Autowired
 	SecretNameGeneratingService nameGeneratingService;
 
 	@GetMapping(value = "/employees")
@@ -42,20 +45,20 @@ public class BotController {
 
 	@GetMapping(value = "/employees/{empId}")
 	public Employee findById(@PathVariable("empId") int id) {
-		System.out.println("inside find by id:"+ id);
+		System.out.println("inside find by id:" + id);
 		return employeeService.getEmployeesById(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping(value = "/employees",method = RequestMethod.POST)
+	@RequestMapping(value = "/employees", method = RequestMethod.POST)
 	public Employee addEmployee(@RequestBody Employee employee) {
-		System.out.println("inside add record:"+ employee);
+		System.out.println("inside add record:" + employee);
 		return employeeService.addEmployee(employee);
 	}
 
-	@RequestMapping(value = "/employees",method = RequestMethod.PUT)
+	@RequestMapping(value = "/employees", method = RequestMethod.PUT)
 	public Employee updateEmployee(@RequestBody Employee employee) {
-		System.out.println("inside update record:"+ employee);
+		System.out.println("inside update record:" + employee);
 		return employeeService.updateEmployee(employee);
 	}
 
@@ -80,4 +83,11 @@ public class BotController {
 		return employeeService.getAllEmployees();
 	}
 
+	@GetMapping(value = "/sendEmails")
+	@ResponseStatus(HttpStatus.OK)
+	public void sendEmails() {
+		log.info("inside sendEmails");
+		List<Employee> list = employeeService.getAllEmployees();
+		emailService.sendEmailstoEmployee(list);
+	}
 }
