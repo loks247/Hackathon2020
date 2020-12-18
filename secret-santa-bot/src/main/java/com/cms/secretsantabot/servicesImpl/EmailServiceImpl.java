@@ -28,9 +28,8 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender mailSender;
 
 	@Override
-	public void sendEmails(List<Employee> fromGiftTos) {
-		fromGiftTos.stream().forEach(emp1 -> {
-			Employee employee = employeeRepository.getEmployeesById(emp1.getToEmpId());
+	public void sendEmailstoEmployee(List<Employee> employees) {
+		employees.stream().forEach(employee -> {
 			SimpleMailMessage simpleMailMessage = composeEmail("subject", "message", employee);
 			log.info("Sending Email to={}", employee.getEmpName());
 			mailSender.send(simpleMailMessage);
@@ -38,7 +37,6 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	public SimpleMailMessage composeEmail(String subject, String messageText, Employee employee) {
-
 		final SimpleMailMessage message = new SimpleMailMessage();
 		message.setSubject(subject);
 		message.setText(messageText);
